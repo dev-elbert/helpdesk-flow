@@ -76,3 +76,6 @@ Em **Settings → Pages**, selecione **Deploy from a branch**, a branch `main` e
 ## Licença
 
 MIT. Veja o arquivo [LICENSE](LICENSE).
+
+<img width="1847" height="957" alt="image" src="https://github.com/user-attachments/assets/fc970d7e-55e3-42b8-8cbd-109723ef1a84" />
+

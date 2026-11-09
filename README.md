@@ -8,8 +8,7 @@
 
 Projeto de portfólio que simula uma central de atendimento de suporte. Feito com **HTML, CSS e JavaScript puro**, sem bibliotecas, sem build e sem servidor.
 
-<!-- Depois de publicar no GitHub Pages, troque o link abaixo pelo seu. -->
-**[▶ Ver demonstração ao vivo](https://SEU-USUARIO.github.io/helpdesk-flow/)**
+**[▶ Ver demonstração ao vivo](https://dev-elbert.github.io/helpdesk-flow/)**
 
 <!-- Para mostrar a tela aqui: tire um print, salve como docs/screenshot.png e descomente a linha abaixo. -->
 <!-- ![Tela do FlowDesk](docs/screenshot.png) -->
@@ -72,7 +71,7 @@ Manipulação do DOM, eventos, arrays (`filter`, `map`, `sort`), `Blob` e downlo
 
 ## Publicação no GitHub Pages
 
-Em **Settings → Pages**, selecione **Deploy from a branch**, a branch `main` e a pasta `/ (root)`. Em um ou dois minutos o site fica no ar em `https://SEU-USUARIO.github.io/helpdesk-flow/`.
+Em **Settings → Pages**, selecione **Deploy from a branch**, a branch `main` e a pasta `/ (root)`. Em um ou dois minutos o site fica no ar em `https://dev-elbert.github.io/helpdesk-flow/`.
 
 ## Licença
 

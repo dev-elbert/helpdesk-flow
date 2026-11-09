@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b1220" />
+  <meta name="description" content="FlowDesk: painel de gestão de chamados feito com HTML, CSS e JavaScript puro. Projeto de portfólio." />
+  <meta property="og:title" content="FlowDesk | Gestão inteligente de chamados" />
+  <meta property="og:description" content="Painel de chamados com busca, filtros, exportação CSV e dados salvos no navegador." />
+  <meta property="og:type" content="website" />
+  <title>FlowDesk | Gestão inteligente de chamados</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <noscript><p class="noscript">O FlowDesk precisa de JavaScript ativado para funcionar.</p></noscript>
+
+  <div class="app">
+    <aside class="sidebar">
+      <a class="brand" href="#inicio" aria-label="FlowDesk, início">
+        <span class="brand-icon" aria-hidden="true">F</span>
+        <span>Flow<span class="brand-accent">Desk</span><small>SUPPORT WORKSPACE</small></span>
+      </a>
+      <div class="sidebar-label">WORKSPACE</div>
+      <nav aria-label="Navegação principal">
+        <a class="nav-item active" href="#inicio" aria-current="page"><span aria-hidden="true">▦</span> <span>Painel de chamados</span></a>
+        <a class="nav-item" href="#sobre"><span aria-hidden="true">◈</span> <span>Sobre o projeto</span></a>
+      </nav>
+      <div class="sidebar-bottom">
+        <span class="online-dot" aria-hidden="true"></span> Ambiente de demonstração
+        <small>Dados armazenados neste navegador</small>
+      </div>
+    </aside>
+
+    <main id="inicio" class="main-content">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">CENTRAL DE OPERAÇÕES</div>
+          <h1>Visão geral <span class="h1-muted">dos chamados</span></h1>
+          <p>Organize solicitações e acompanhe a operação em um só lugar.</p>
+        </div>
+        <div class="header-actions">
+          <button id="resetBtn" class="button button-secondary" type="button">↺ Restaurar demo</button>
+          <button id="exportBtn" class="button button-secondary" type="button">⇩ Exportar CSV</button>
+          <button id="newTicketBtn" class="button button-primary" type="button">＋ Novo chamado</button>
+        </div>
+      </header>
+
+      <section class="metrics" aria-label="Indicadores">
+        <article class="metric">
+          <div class="metric-top">Total de chamados <span class="metric-icon" aria-hidden="true">▦</span></div>
+          <div class="metric-value" id="metricTotal">0</div>
+          <div class="metric-note">Registrados na plataforma</div>
+        </article>
+        <article class="metric">
+          <div class="metric-top">Em aberto <span class="metric-icon amber" aria-hidden="true">◷</span></div>
+          <div class="metric-value" id="metricOpen">0</div>
+          <div class="metric-note"><span class="small-dot amber-bg"></span> Aguardando resolução</div>
+        </article>
+        <article class="metric">
+          <div class="metric-top">Em andamento <span class="metric-icon blue" aria-hidden="true">↗</span></div>
+          <div class="metric-value" id="metricProgress">0</div>
+          <div class="metric-note"><span class="small-dot blue-bg"></span> Em atendimento</div>
+        </article>
+        <article class="metric">
+          <div class="metric-top">Resolvidos <span class="metric-icon green" aria-hidden="true">✓</span></div>
+          <div class="metric-value" id="metricResolved">0</div>
+          <div class="metric-note"><span class="small-dot green-bg"></span> Concluídos com sucesso</div>
+        </article>
+      </section>
+
+      <section class="panel" aria-labelledby="ticketTitle">
+        <div class="panel-header">
+          <div>
+            <h2 id="ticketTitle">Fila de atendimento</h2>
+            <p>Gerencie prioridades, responsáveis e status.</p>
+          </div>
+          <span class="result-count" id="resultCount" aria-live="polite"></span>
+        </div>
+
+        <div class="filters">
+          <label class="search-wrap">
+            <span aria-hidden="true">⌕</span>
+            <input id="searchInput" type="search" placeholder="Buscar por título, cliente, responsável ou número..." aria-label="Buscar chamados" />
+          </label>
+          <label class="select-wrap">Status
+            <select id="statusFilter" aria-label="Filtrar status">
+              <option value="todos">Todos</option>
+              <option value="Aberto">Aberto</option>
+              <option value="Em andamento">Em andamento</option>
+              <option value="Resolvido">Resolvido</option>
+            </select>
+          </label>
+          <label class="select-wrap">Prioridade
+            <select id="priorityFilter" aria-label="Filtrar prioridade">
+              <option value="todas">Todas</option>
+              <option value="Alta">Alta</option>
+              <option value="Média">Média</option>
+              <option value="Baixa">Baixa</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">CHAMADO</th>
+                <th scope="col">CLIENTE</th>
+                <th scope="col">PRIORIDADE</th>
+                <th scope="col">STATUS</th>
+                <th scope="col">RESPONSÁVEL</th>
+                <th scope="col">CRIADO EM</th>
+                <th scope="col">AÇÕES</th>
+              </tr>
+            </thead>
+            <tbody id="ticketBody"></tbody>
+          </table>
+        </div>
+        <div id="emptyState" class="empty-state" hidden>
+          <p id="emptyMessage">Nenhum chamado encontrado com esses filtros.</p>
+          <button id="clearFiltersBtn" class="button button-secondary" type="button">Limpar filtros</button>
+        </div>
+      </section>
+
+      <footer id="sobre">
+        <strong>FlowDesk</strong>: projeto de portfólio com HTML, CSS e JavaScript puro.
+        Sem back-end: dados locais para fins de demonstração.
+      </footer>
+    </main>
+  </div>
+
+  <dialog id="ticketDialog" aria-labelledby="dialogTitle">
+    <form id="ticketForm" class="ticket-form">
+      <div class="dialog-heading">
+        <div>
+          <div class="eyebrow">ATENDIMENTO</div>
+          <h2 id="dialogTitle">Novo chamado</h2>
+        </div>
+        <button type="button" class="icon-button" id="closeDialogBtn" aria-label="Fechar">✕</button>
+      </div>
+      <input type="hidden" id="ticketId" />
+      <label>Título do chamado<input id="titleInput" required maxlength="100" placeholder="Ex.: Falha ao emitir relatório" /></label>
+      <label>Cliente<input id="clientInput" required maxlength="70" placeholder="Ex.: Empresa Aurora" /></label>
+      <div class="form-grid">
+        <label>Prioridade
+          <select id="priorityInput">
+            <option>Baixa</option>
+            <option selected>Média</option>
+            <option>Alta</option>
+          </select>
+        </label>
+        <label>Status
+          <select id="statusInput">
+            <option>Aberto</option>
+            <option>Em andamento</option>
+            <option>Resolvido</option>
+          </select>
+        </label>
+      </div>
+      <label>Responsável<input id="ownerInput" maxlength="60" placeholder="Ex.: Ana Souza" /></label>
+      <label>Descrição<textarea id="descriptionInput" rows="3" maxlength="600" placeholder="Descreva a solicitação (opcional)"></textarea></label>
+      <div class="dialog-actions">
+        <button class="button button-secondary" id="cancelBtn" type="button">Cancelar</button>
+        <button class="button button-primary" type="submit">Salvar chamado</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="script.js" defer></script>
+</body>
+</html>
